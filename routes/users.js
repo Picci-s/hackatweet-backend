@@ -82,4 +82,22 @@ router.post('/signin', (req, res) => {
   };
 });
 
+/*------------------------------------------*/
+// Route POST signin
+
+router.get('/canLike/:token', (req, res) => {
+  User.findOne({ token: req.params.token })
+  .then( data => {
+    if (data) {
+      res.json({ result: true });
+    } else {
+      res.json({ 
+        result: false,
+        error: "User not found",
+       });
+    };
+  })
+  .catch(error => console.error(error));
+});
+
 module.exports = router;
