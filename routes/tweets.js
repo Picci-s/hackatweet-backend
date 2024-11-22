@@ -34,27 +34,12 @@ router.get("/read", (req, res) => {
       if (data === null) {
         return res.json({ result: false, message: "Aucun tweet trouvé !" });
       }
-      res.json({ result: true, data: data });
+      res.json({ result: true, tweetsData: data });
     })
     .catch((error) => {
       res.json({ result: false, error: error.message });
     });
 });
-
-/*router.get("/read/:hashtag", (req, res) => {
-    Tweet.find({
-      hashtag: { $regex: `^#${req.params.hashtag}$`, $options: 'i' }  
-    })
-      .then(data => {
-        if (data.length === 0) {
-          return res.json({ result: false, message: "Aucun tweet trouvé avec ce hashtag." });
-        }
-        res.json({ result: true, data: data });
-      })
-      .catch(error => {
-        res.json({ result: false, error: error.message });
-      });
-  });*/
 
 router.delete("/delete/:tweetId", (req, res) => {
   Tweet.deleteOne({ _id: req.params.tweetId }).then((data) => {
