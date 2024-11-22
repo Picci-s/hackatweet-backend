@@ -17,7 +17,6 @@ router.post('/creat', (req, res) => {
                 message: req.body.message,
                 user: data._id,
                 date: new Date,
-                likes: [req.body.users],
             });
             //Save new tweet in BDD
             newTweet.save()
@@ -26,8 +25,17 @@ router.post('/creat', (req, res) => {
                         res.json({ result: false });
                         return;
                     }
-                    { res.json({ result: true, data: data }) };
+                    res.json({ result: true, data: data });
                 });
+        })
+})
+
+router.delete('/delete/:tweetId', (req, res) => {
+    Tweet.deleteOne({ _id: req.params.tweetId })
+        .then(data => {
+            if (data.deleteCount > 0) {
+                res.json({ result: true, message: 'You kill me!' });
+            }
         })
 })
 
