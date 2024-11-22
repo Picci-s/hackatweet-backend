@@ -5,8 +5,6 @@ const userSchema = mongoose.Schema({
     username: String,
     password: String,
     token: String,
-    tweets: Array,
-    likes: Array,
 });
 
 const User = mongoose.model('users', userSchema);

@@ -30,8 +30,8 @@ router.post('/signup', (req, res) => {
           username: req.body.username,
           password: hash,
           token: uid2(32),
-          tweets: [],
-          likes: [],
+          // tweets: [],
+          // likes: [],
         });
         // Save new user into database
         newUser.save().then(newDoc => {
