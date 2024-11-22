@@ -30,15 +30,16 @@ router.post("/creat", (req, res) => {
 
 router.get("/read", (req, res) => {
   Tweet.find()
-    .then((data) => {
-      if (data === null) {
-        return res.json({ result: false, message: "Aucun tweet trouvé !" });
-      }
-      res.json({ result: true, tweetsData: data });
-    })
-    .catch((error) => {
-      res.json({ result: false, error: error.message });
-    });
+  .populate("user")
+  .then((data) => {
+    if (data === null) {
+      return res.json({ result: false, message: "Aucun tweet trouvé !" });
+    }
+    res.json({ result: true, tweetsData: data });
+  })
+  .catch((error) => {
+    res.json({ result: false, error: error.message });
+  });
 });
 
 router.delete("/delete/:tweetId", (req, res) => {
