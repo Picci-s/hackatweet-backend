@@ -15,7 +15,7 @@ router.post("/creat", (req, res) => {
     const newTweet = new Tweet({
       message: req.body.message,
       user: data._id,
-      date: new Date.now(),
+      date: new Date(),
     });
     //Save new tweet in BDD
     newTweet.save().then((data) => {
